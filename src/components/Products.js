@@ -1,14 +1,50 @@
 import React, { useState } from "react";
-import { cartProducts } from "../Data/data";
 import { useEffect } from "react";
 import Loader from "./Loader";
-import Fetch from "./fetch";
+import {useSelector, useDispatch} from 'react-redux';
+import axios from 'axios';
+import {setProducts} from '../redux/actions/productActions';
+
 
 const Items = () => {
-
-  const [cart, setCart] = useState([]);
+  const dispatch = useDispatch();
+  const url = 'https://fakestoreapi.com/products?limit=5'
+  const [searchField, setSearchField] = useState('')
   const [loading, setLoading] = useState(true)
+  const products = useSelector((state) => state.allProducts.products)
+  
+  const handleSearch = (e) => {
+    setSearchField(e.target.value);
+  }
 
+  const fetchProducts = async () => {
+
+    try {
+      const response = await axios
+      .get(url)
+      .catch((err) => {
+        console.log('error', err)
+      })
+      dispatch(setProducts(response.data))  
+      setLoading(false)
+    } catch (error) {
+      
+    }
+  }
+
+  useEffect(() => {
+    fetchProducts()
+  }, [dispatch])
+
+  const filteredProducts = products.filter((post) => {
+    if (searchField === '') {
+      return post
+    } else if (post.title.toLowerCase().includes(searchField.toLowerCase())) {
+      return post
+    }
+  });
+
+  console.log(filteredProducts)
  
   if (loading) {
     return(
@@ -30,10 +66,24 @@ const Items = () => {
             type="text"
             placeholder="Find products"
             className="form-control"
+            value={searchField}
+            onChange={handleSearch}
           />
         </form>
       </div>
-
+      <div className="grid-container">
+        {filteredProducts.map((item) => {
+            const {id,title, image, price} = item;
+          return (
+            <div key={id} className="products text-center">
+              <h6 className="fs-5">{title}</h6>
+              <img src={image} alt={title} />
+              <h3>${price}</h3>
+              <button className="btn btn-primary">ADD TO CART</button>
+            </div>
+          );
+        })}
+      </div>
 
         </div>
   );

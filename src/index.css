@@ -321,7 +321,7 @@ img {
   display: flex;
   flex-direction: column;
   row-gap: 10px;
-  /* height: 400px; */
+  /* height: 500px; */
 }
 
 .products img {
@@ -378,6 +378,13 @@ svg path {
   }
 }
 
+.product-grid img {
+  object-fit: contain;
+}
+
+.product-grid {
+  text-align: center;
+}
 
 
 

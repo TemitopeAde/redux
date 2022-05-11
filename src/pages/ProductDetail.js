@@ -1,14 +1,17 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { cartProducts } from "../Data/data";
 import { useEffect, useState } from "react";
 import Loader from "../components/Loader";
+import { useDispatch, useSelector } from "react-redux";
+import { selectedProduct } from "../redux/actions/productActions";
+
+
 
 const ProductDetail = () => {
   const { id } = useParams();
+  const dispatch = useDispatch();
+  const product = useSelector((state) => state.product)
   const url = `https://fakestoreapi.com/products/${id}`;
-
-  const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const getProductById = async () => {
@@ -16,16 +19,19 @@ const ProductDetail = () => {
       await fetch(url)
         .then((response) => response.json())
         .then((result) => {
-          setProduct(result);
+          dispatch(selectedProduct(result))
           setLoading(false)
-          console.log(result)
         });
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+    }
   };
+
+  console.log(product)
 
   useEffect(() => {
     getProductById();
-  }, []);
+  }, [id]);
 
   if (loading) {
     return <Loader />;
