@@ -1,12 +1,11 @@
 import { createStore } from "redux";
-import {cartProducts} from '../Data/data';
-import { reducer } from "../reducer";
+import {reducers} from "./reducers/index";
 
+const store = createStore(
+    reducers, 
+    {}, 
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
-const initData = {
-    total: 0,
-    amount: 0,
-    cart: cartProducts
-}
+export default store
 
-export const store = createStore(reducer, initData)

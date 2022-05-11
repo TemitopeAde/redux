@@ -1,6 +1,4 @@
 import React from "react";
-import { Provider } from "react-redux";
-import { store } from "./Redux/store";
 import Index from "./pages";
 import Header from "./components/Header";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -11,7 +9,7 @@ function App() {
   // cart setup
 
   return (
-    <Provider store={store}>
+    
       <BrowserRouter>
         <Header />
         <Routes>
@@ -20,8 +18,6 @@ function App() {
         </Routes>
       </BrowserRouter>
 
-     
-    </Provider>
   );
 }
 
