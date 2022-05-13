@@ -803,7 +803,9 @@ a.remove:hover {
 }
 
 
-
+ul {
+  list-style: none;
+}
 
 
 
