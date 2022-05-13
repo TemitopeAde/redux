@@ -1,42 +1,41 @@
 import { actionType } from "../constants/action-type";
 
-
 const initState = {
-    products: [
-        
-    ]
-}
+  products: [],
+};
 
-export const productReducer = (state=initState, action) => {
-    const {type, payload} = action
+const initialCart = {
+  cartItems: [],
+};
 
-    if (type === actionType.SET_PRODUCTS) {
-        return {...state, products: payload}
-    }
+export const productReducer = (state = initState, action) => {
+  const { type, payload } = action;
 
-    if (type === actionType.SELECTED_PRODUCT) {
-        // console.log(payload)
-        return {...state, products: payload}
-    }
+  if (type === actionType.SET_PRODUCTS) {
+    return { ...state, products: payload };
+  }
 
-    return state
-    
-}
+  return state;
+};
 
+export const cartReducer = (state = initialCart, action) => {
+  const {type, payload} = action
+  
+  if (type === actionType.ADD_TO_CART) {
+    console.log(state)
+    return { ...state, cartItems: payload };
+  }
+  return state
+};
 
-export const selectedProductReducer = (state={}, action) => {
-    const {type, payload} = action;
+export const selectedProductReducer = (state = {}, action) => {
+  const { type, payload } = action;
 
+  if (type === actionType.SELECTED_PRODUCT) {
+    return { ...state, ...payload };
+  }
 
-    if (type === actionType.SELECTED_PRODUCT) {
-        // console.log(payload)
-        return {...state, ...payload}
-    }
+  return state;
+};
 
-    return state
-
-
-
-
-}
 

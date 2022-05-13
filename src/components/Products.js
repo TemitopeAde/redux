@@ -4,6 +4,7 @@ import Loader from "./Loader";
 import {useSelector, useDispatch} from 'react-redux';
 import axios from 'axios';
 import {setProducts} from '../redux/actions/productActions';
+import { Link } from "react-router-dom";
 
 
 const Items = () => {
@@ -34,7 +35,7 @@ const Items = () => {
 
   useEffect(() => {
     fetchProducts()
-  }, [dispatch])
+  }, [])
 
   const filteredProducts = products.filter((post) => {
     if (searchField === '') {
@@ -76,8 +77,11 @@ const Items = () => {
             const {id,title, image, price} = item;
           return (
             <div key={id} className="products text-center">
-              <h6 className="fs-5">{title}</h6>
+              <h6 className="fs-5">{title.slice(0,20)}</h6>
+              <Link to={`/products/${id}`}>
               <img src={image} alt={title} />
+              </Link>
+              
               <h3>${price}</h3>
               <button className="btn btn-primary">ADD TO CART</button>
             </div>

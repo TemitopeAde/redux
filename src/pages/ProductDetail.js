@@ -3,14 +3,17 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Loader from "../components/Loader";
 import { useDispatch, useSelector } from "react-redux";
-import { selectedProduct } from "../redux/actions/productActions";
-
+import { selectedProduct, cart } from "../redux/actions/productActions";
+import { useNavigate } from "react-router-dom";
 
 
 const ProductDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product)
+  const cartItem = useSelector((state) => state.cartProduct.cartItems)
+  const navigate = useNavigate();
+  // console.log(cartItem);
   const url = `https://fakestoreapi.com/products/${id}`;
   const [loading, setLoading] = useState(true);
 
@@ -27,7 +30,11 @@ const ProductDetail = () => {
     }
   };
 
-  console.log(product)
+  // console.log(product)
+  const handleClick = () => {
+    console.log(dispatch(cart(product)))
+    dispatch(cart(cartItem))
+  }
 
   useEffect(() => {
     getProductById();
@@ -47,8 +54,8 @@ const ProductDetail = () => {
         <p className="fs-4">{product.description}</p>
         <p className="fs-5">${product.price}</p>
         <div className="btn-grid">
-          <button className="btn btn-primary">ADD TO CART</button>
-          <button className="btn btn-danger">GO TO CART</button>
+          <button onClick={handleClick} className="btn btn-primary">ADD TO CART</button>
+          <button onClick={() => navigate("/cart")} className="btn btn-danger">GO TO CART</button>
         </div>
       </div>
     </div>
