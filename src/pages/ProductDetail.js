@@ -17,18 +17,22 @@ const ProductDetail = () => {
   const url = `https://fakestoreapi.com/products/${id}`;
   const [loading, setLoading] = useState(true);
 
-  const getProductById = async () => {
-    try {
-      await fetch(url)
-        .then((response) => response.json())
-        .then((result) => {
-          dispatch(selectedProduct(result))
-          setLoading(false)
-        });
-    } catch (error) {
-      console.log(error)
-    }
-  };
+  useEffect(() => {
+    const getProductById = async () => {
+      try {
+        await fetch(url)
+          .then((response) => response.json())
+          .then((result) => {
+            dispatch(selectedProduct(result))
+            setLoading(false)
+          });
+      } catch (error) {
+        console.log(error)
+      }
+    };
+    getProductById()
+  }, [loading]) // eslint-disable-line react-hooks/exhaustive-deps
+
 
   // console.log(product)
   const handleClick = () => {
@@ -36,9 +40,9 @@ const ProductDetail = () => {
     dispatch(cart(cartItem))
   }
 
-  useEffect(() => {
-    getProductById();
-  }, [id]);
+  // useEffect(() => {
+  //   getProductById();
+  // }, []);
 
   if (loading) {
     return <Loader />;

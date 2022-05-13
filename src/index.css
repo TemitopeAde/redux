@@ -35,8 +35,8 @@ Variables
   box-sizing: border-box;
 }
 body {
-  font-family: var(--ff-primary);
-  background: var(--clr-grey-10);
+
+  font-family: 'Montserrat', sans-serif;
   color: var(--clr-grey-1);
   line-height: 1.5;
   font-size: 0.875rem;
@@ -411,23 +411,11 @@ a img {
   border: none;
 }
 
-article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
-  display: block;
-}
 
-* {
-  box-sizing: border-box;
-}
 
-body {
-  color: #333;
-  -webkit-font-smoothing: antialiased;
-  font-family: "Droid Serif", serif;
-}
 
-img {
-  max-width: 100%;
-}
+
+
 
 .cf:before,
 .cf:after {
@@ -535,7 +523,7 @@ img {
 .cart .items {
   display: block;
   width: 100%;
-  vertical-align: middle;
+  /* vertical-align: middle; */
   padding: 1.5em;
   border-bottom: 1px solid #fafafa;
 }
@@ -718,7 +706,7 @@ a.remove:hover {
 }
 .promoCode .btn {
   font-size: 0.85em;
-  paddding: 0.5em 2em;
+  padding: 0.5em 2em;
 }
 
 /* TOTAL AND CHECKOUT  */

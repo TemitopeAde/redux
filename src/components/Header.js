@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, Container, Nav, Button } from "react-bootstrap";
-
+// import {AiOutlineShoppingCart} from 'react-icons/ai';
 
 
 
@@ -27,12 +27,7 @@ const Header = () => {
             <Nav.Link className="nav-links" href="#results">
               Our Results
             </Nav.Link>
-            <Nav.Link className="nav-links" href="#success">
-              Member Success
-            </Nav.Link>
-            <Nav.Link className="nav-links" href="#contact">
-              Contact Us
-            </Nav.Link>
+            
           </Nav>
           <Nav>
             <Nav.Link>
